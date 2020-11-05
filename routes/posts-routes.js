@@ -2,21 +2,38 @@ const router = require('express').Router();
 
 const { Post, Category } = require('../db');
 
-router.get('/posts', async (req,res) =>{
-    const posts = await Post.findAll({ 
+// Retrieve all posts with createdAt order DESC (only columns id, title, image, category and createdAt)
+router.get('/posts', (req,res) => {
+    Post.findAll({ 
         order: [['id','DESC']],
         attributes: ['id','title','image',['postCategory','category'],'createdAt']      
     })
-    res.json(posts)   
+    .then( (posts) => {
+        res.json(posts) 
+    })
+    .catch( (error) => {
+        res.json(error)
+    })      
 });
 
-router.post('/posts', async (req,res) =>{
-    const [category, created] = await Category.findOrCreate({
+// Create a new post
+router.post('/posts', (req,res) => {
+    Category.findOrCreate({
         where: { category: req.body.category }
     })
-    const post = await Post.create(req.body);
-    await post.setCategory(category);
-    res.json(post)
+    .then( ([category, created]) => {        
+        Post.create(req.body)
+        .then( (post) => {
+            post.setCategory(category);
+            res.json(post);
+        })
+        .catch( (error) => {
+            res.json(error)
+        })
+    })
+    .catch( (error) => {
+        res.json(error)
+    })   
 });
 
 module.exports = router;
