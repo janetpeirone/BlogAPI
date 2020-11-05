@@ -19,10 +19,14 @@ const Post = PostModel(sequelize, Sequelize);
 const Category = CategoryModel(sequelize, Sequelize);
 
 Category.hasMany(Post);
+Post.belongsTo(Category, { targetKey: 'category', foreignKey: 'postCategory' });
 
 sequelize.sync( {force: true} )
     .then(() => {
         console.log('The tables were just created')
+    })
+    .catch((error) => {
+        console.log('There was an error', error)
     })
     
 module.exports = {

@@ -11,5 +11,7 @@ module.exports = (sequelize, type) => {
             unique: true,
             allowNull: false
         }
-    });
+    }, 
+        { timestamps: false}
+    );
 }
