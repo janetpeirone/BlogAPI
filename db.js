@@ -21,7 +21,7 @@ const Category = CategoryModel(sequelize, Sequelize);
 Category.hasMany(Post);
 Post.belongsTo(Category, { targetKey: 'category', foreignKey: 'postCategory' });
 
-sequelize.sync( {force: true} )
+sequelize.sync( {force: false} )
     .then(() => {
         console.log('The tables were just created')
     })
