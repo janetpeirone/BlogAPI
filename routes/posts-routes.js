@@ -41,10 +41,28 @@ router.get('/posts/:id', (req,res) => {
     Post.findByPk( req.params.id )
     .then( (post) => {
         if(post === null) {
-            res.json('Post not found!');        
+            res.json('Error: Post not found!');        
         }
         else {
             res.json(post);
+        }
+    })
+    .catch( (error) => {
+        res.json(error)
+    })
+})
+
+// Delete post by id
+router.delete('/posts/:id', (req,res) => {
+    Post.destroy({
+        where: { id: req.params.id }
+    })
+    .then( (post) => {
+        if(post === 0) {
+            res.json('Error: Post not found!');        
+        }
+        else {
+            res.json('Post was deleted!');
         }
     })
     .catch( (error) => {
