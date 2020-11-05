@@ -36,4 +36,20 @@ router.post('/posts', (req,res) => {
     })   
 });
 
+// Retrieve post by id
+router.get('/posts/:id', (req,res) => {
+    Post.findByPk( req.params.id )
+    .then( (post) => {
+        if(post === null) {
+            res.json('Post not found!');        
+        }
+        else {
+            res.json(post);
+        }
+    })
+    .catch( (error) => {
+        res.json(error)
+    })
+})
+
 module.exports = router;
