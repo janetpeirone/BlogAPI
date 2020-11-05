@@ -1,19 +1,15 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('post', {
+    return sequelize.define('category', {
         // Model attributes are defined here
         id: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        title: {
+        category: {
             type: type.STRING,
+            unique: true,
             allowNull: false
-        },
-        content: {
-            type: type.TEXT,
-            allowNull:false
-        },
-        image: type.STRING        
+        }
     });
 }
