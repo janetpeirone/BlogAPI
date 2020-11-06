@@ -14,6 +14,6 @@ module.exports = (sequelize, type) => {
             type: type.TEXT,
             allowNull:false
         },
-        image: type.STRING        
+        image: type.TEXT        
     });
 }

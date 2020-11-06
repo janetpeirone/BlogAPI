@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { Post, Category } = require('../db');
+const { Post, Category } = require('../models/db');
 
 // Retrieve all posts with createdAt order DESC (only columns id, title, image, category and createdAt)
 router.get('/posts', (req,res) => {

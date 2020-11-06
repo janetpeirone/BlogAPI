@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
-const PostModel = require('./models/post');
-const CategoryModel = require('./models/category');
+const PostModel = require('./post');
+const CategoryModel = require('./category');
 
 const sequelize = new Sequelize('blog_db','root','hola123',{
     host: 'localhost',
